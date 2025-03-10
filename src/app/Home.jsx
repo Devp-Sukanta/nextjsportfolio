@@ -1,14 +1,15 @@
-import Navbar from "@/components/Nav";
-import Image from "next/image";
-import Hero from "./Hero";
-import About from "./About";
-import ImageMarquee from "./MarqueSection";
-import Projects from "./Projects";
-import Services from "./Services";
-import Contact from "./Contact";
-import Footer from "./Footer";
+import React from 'react'
+import Hero from './Hero'
+import Nav from '../layouts/Nav'
+import About from './About'
+import Services from './Services'
+import MarqueSection from './MarqueSection'
+import ImageMarquee from './MarqueSection'
+import Projects from './Projects'
+import Contact from './Contact'
+import Footer from './Footer'
 
-export default function Home() {
+function Home() {
 
   const images = [
     "/assets/imgs/technologies/html.png",
@@ -34,18 +35,19 @@ export default function Home() {
   ]
 
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <div className='container mx-auto'>
+    <div>
+        <Nav/>
+        <Hero/>
+        <div className='container mx-auto'>
         <ImageMarquee images={images} speed={40} direction="left" className="rounded-lg p-4" />
-      </div>
-      <About />
-      <Services/>
-      <Projects/>
-      <Contact/>
-      <Footer/>
-
-    </>
-  );
+        </div>
+        <About/>
+        <Services/>
+        <Projects/>
+        <Contact/>
+        <Footer/>
+    </div>
+  )
 }
+
+export default Home
