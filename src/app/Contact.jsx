@@ -5,56 +5,80 @@ import { useState } from "react"
 
 
 export default function Contact() {
-    const [data,setData]= useState({
-        name:'',
-        email:'',
-        phone:'',
-        message:'',
-        subject:''
+    const [data, setData] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        message: '',
+        subject: ''
     });
-    const [error,setError]= useState(null);
-    const [success,setSuccess]= useState(null);
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
+    const [loading, setLoading] = useState(false);
 
 
 
-    const handleChange= (e)=>{
-        const {name,value}= e.target;
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
 
         setData({
             ...data,
-            [name]:value
+            [name]: value
         })
     };
 
-    const handleSubmit=async(e)=>{
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         // console.log(data)
 
-        const {name,email,phone,subject,message}= data;
+        const { name, email, phone, subject, message } = data;
 
 
-        if(!name || !email || !phone || !subject || !message){
-            return setError({name:'formfielderror',message:'please provide valid name,email,phone number and message'})
+        if (!name || !email || !phone || !subject || !message) {
+            setError({ name: 'formfielderror', message: 'please provide valid name,email,phone number and message' });
+            setTimeout(()=>{
+                setError(null);
+            },2000)
+            return 
         };
 
+
+        setLoading(true);
+
         try {
-            const formRes= await fetch("/api/v1/contact",{
-                method:"POST",
-                body:JSON.stringify(data),
-                headers:{referrer:document.referrer || "google"}
+            const formRes = await fetch("/api/v1/contact", {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: { referrer: document.referrer || "google" }
             });
 
-            const res= await formRes.json();
+            const res = await formRes.json();
             // console.log(res,'response');
-            if(res.success){
-                setSuccess({name:'formsubmitsuccess',message:res?.message || 'form submitted successfully.'})
-            }else{
-                setError({name:'formfielderror',message: res?.message || 'something went wrong. try agin after some time'})
+            if (res.success) {
+                setSuccess({ name: 'formsubmitsuccess', message: res?.message || 'form submitted successfully.' });
+                setData({
+                    name: '',
+                    email: '',
+                    phone: '',
+                    message: '',
+                    subject: ''
+                });
+                setTimeout(()=>{
+                    setSuccess(null);
+                },2000)
+            } else {
+                setError({ name: 'formfielderror', message: res?.message || 'something went wrong. try agin after some time' })
             }
         } catch (error) {
-            setError({name:'formfielderror',message:'something went wrong. try agin after some time'})
+            setError({ name: 'formfielderror', message: 'something went wrong. try agin after some time' });
+            setTimeout(()=>{
+                setError(null);
+            },2000)
         }
+
+        setLoading(false)
     }
 
     return (
@@ -67,13 +91,13 @@ export default function Contact() {
                 </div>
 
                 {/* Contact content */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     {/* Contact info cards - left side */}
                     <div className="space-y-6">
                         {/* Address card */}
                         <div className="bg-[#222222] p-6 rounded-md flex gap-3 flex-row items-center md:items-start" style={{ alignItems: "center" }}>
                             <div className="w-8 h-8 flex items-center justify-center">
-                                <img src="/assets/imgs/location.png" alt="location"/>
+                                <img src="/assets/imgs/location.png" alt="location" />
                             </div>
                             <p className="text-gray-300 text-center md:text-left">Panskura, E.Medinipur, W.B, 721139</p>
                         </div>
@@ -81,7 +105,7 @@ export default function Contact() {
                         {/* Phone card */}
                         <div className="bg-[#222222] p-6 rounded-md flex gap-3 flex-row items-center md:items-start" style={{ alignItems: "center" }}>
                             <div className="w-8 h-8 flex items-center justify-center">
-                                <img src="/assets/imgs/telephone.png" alt="telephone"/>
+                                <img src="/assets/imgs/telephone.png" alt="telephone" />
                             </div>
                             <p className="text-gray-300 text-center md:text-left">(+91) 78725-28238</p>
                         </div>
@@ -89,7 +113,7 @@ export default function Contact() {
                         {/* Email card */}
                         <div className="bg-[#222222] p-6 rounded-md flex gap-3 flex-row items-center md:items-start" style={{ alignItems: "center" }}>
                             <div className="w-8 h-8 flex items-center justify-center">
-                                <img src="/assets/imgs/mail.png" alt="mail" className="w-full h-auto"/>
+                                <img src="/assets/imgs/mail.png" alt="mail" className="w-full h-auto" />
                             </div>
                             <p className="text-gray-300 text-center md:text-left">sukanta7.official@gmail.com</p>
                         </div>
@@ -117,7 +141,7 @@ export default function Contact() {
                                         name="phone"
                                         value={data?.phone}
                                         onChange={handleChange}
-                                   />
+                                    />
                                 </div>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -129,7 +153,7 @@ export default function Contact() {
                                         name="email"
                                         value={data?.email}
                                         onChange={handleChange}
-                                    
+
                                     />
                                 </div>
                                 <div>
@@ -139,7 +163,7 @@ export default function Contact() {
                                         className="w-full bg-[#222222] text-white p-3 rounded-md border-0 focus:ring-2 focus:ring-red-600 focus:outline-none"
                                         name="subject"
                                         value={data?.subject}
-                                        onChange={handleChange}/>
+                                        onChange={handleChange} />
                                 </div>
                             </div>
                             <div>
@@ -157,26 +181,26 @@ export default function Contact() {
                                     type="submit"
                                     className="bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-8 rounded-md transition-colors duration-300"
                                 >
-                                    Send Message
+                                    {loading ? "Please Wait..." : "Send Message"}
                                 </button>
                             </div>
                             <div className="text-center lg:text-start">
 
-                           {error && error.name==="formfielderror" && <p className="text-red-500 font-bold border border-red-300 rounded-lg inline-block px-5 py-2 relative"> 
-                                <span className="flex items-center">
-                                    <img src="/assets/imgs/cancel.png" alt="cancelicon" className="h-6 w-6 mr-2"/>
-                                    {error?.message}
-                                </span>
-                                <span className="absolute -top-2 -right-1.5 text-black h-5 w-5 text-center font-light rounded-full bg-red-100 cursor-pointer" onClick={()=>setError(null)}>X</span>
-                            </p>}
+                                {error && error.name === "formfielderror" && <p className="text-red-500 font-bold border border-red-300 rounded-lg inline-block px-5 py-2 relative">
+                                    <span className="flex items-center">
+                                        <img src="/assets/imgs/cancel.png" alt="cancelicon" className="h-6 w-6 mr-2" />
+                                        {error?.message}
+                                    </span>
+                                    <span className="absolute -top-2 -right-1.5 text-black h-5 w-5 text-center font-light rounded-full bg-red-100 cursor-pointer" onClick={() => setError(null)}>X</span>
+                                </p>}
 
-                            {success && success.name==="formsubmitsuccess" && <p className="text-green-600 font-bold border border-green-300 rounded-lg inline-block px-5 py-2 relative"> 
-                                <span className="flex items-center">
-                                    <img src="/assets/imgs/success.png" alt="cancelicon" className="h-6 w-6 mr-2"/>
-                                    {success?.message}
-                                </span>
-                                <span className="absolute -top-2 -right-1.5 text-black h-5 w-5 text-center font-light rounded-full bg-red-100 cursor-pointer text-sm" onClick={()=>setSuccess(null)}>X</span>
-                            </p>}
+                                {success && success.name === "formsubmitsuccess" && <p className="text-green-600 font-bold border border-green-300 rounded-lg inline-block px-5 py-2 relative">
+                                    <span className="flex items-center">
+                                        <img src="/assets/imgs/success.png" alt="cancelicon" className="h-6 w-6 mr-2" />
+                                        {success?.message}
+                                    </span>
+                                    <span className="absolute -top-2 -right-1.5 text-black h-5 w-5 text-center font-light rounded-full bg-red-100 cursor-pointer text-sm" onClick={() => setSuccess(null)}>X</span>
+                                </p>}
                             </div>
                         </form>
                     </div>

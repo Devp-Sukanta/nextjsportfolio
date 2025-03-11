@@ -17,16 +17,16 @@ function Hero() {
                             <p className='uppercase text-lg font-bold'><span className='text-red-500 mb-5'>Find</span> me on</p>
                             <div className='flex flex-wrap gap-4 items-center mt-2'>
 
-                               <a href="" className='w-8 h-8'>
+                               <a href="https://www.facebook.com/share/19xgWjSo92/" className='w-8 h-8'>
                                 <img src="/assets/imgs/facebook.png" alt="facebook" className='w-full object-cover'/>
                                </a>
-                                <a href="#" className='w-8 h-8'>
+                                <a href="https://www.instagram.com/sukanta_dolai?igsh=bWdtN2RseHBsbTN5" className='w-8 h-8'>
                                   <img src="/assets/imgs/instagram.png" alt="instagram" className='w-full object-cover'/>
                                 </a>
-                                <a href="#" className='w-8 h-8'>
+                                <a href="https://in.linkedin.com/in/sukanta-dolai" className='w-8 h-8'>
                                    <img src="/assets/imgs/linkedin.png" alt="linkedin" className='w-full object-cover'/>
                                 </a>
-                                <a href="#" className='w-8 h-8'>
+                                <a href="https://github.com/Sukanta1304" className='w-8 h-8'>
                                    <img src="/assets/imgs/github.png" alt="github" className='w-full object-cover'/>
                                 </a>
 
