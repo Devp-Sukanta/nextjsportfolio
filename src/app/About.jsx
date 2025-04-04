@@ -1,6 +1,19 @@
+'use client'
+
 import CustomBtn from "@/components/CustomBtn";
 
 function About() {
+
+  const handleScroll = () => {
+    const obj = document.querySelector('#contact');
+
+    if (obj) {
+      obj.scrollIntoView({
+        behavior: "smooth"
+      })
+    }
+
+  }
 
   const points = [
     {
@@ -63,7 +76,7 @@ function About() {
               </li>
             ))}
           </ul>
-          <div className='mt-6'>
+          <div className='mt-6' onClick={handleScroll}>
             <CustomBtn title={"Hire Me"} extraClass={'px-10 py-3'} />
           </div>
         </div>

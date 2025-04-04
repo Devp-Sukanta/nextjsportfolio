@@ -81,9 +81,9 @@ export default function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden lg:ml-6 lg:flex">
-            <button className="rounded-md bg-red-500 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-red-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-              Get Started
-            </button>
+            <a href="https://drive.google.com/file/d/1xaEzMTY-p4vWFs653HhR4MhqAr0oYRES/view?usp=drivesdk" target="_blank" className="rounded-md bg-red-500 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-red-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+              Get Resume
+            </a>
           </div>
         </div>
       </nav>
@@ -135,9 +135,9 @@ export default function Navbar() {
 
             {/* Mobile CTA Button */}
             <div className="mt-8 animate-fadeIn" style={{ animationDelay: "400ms" }}>
-              <button className="w-full rounded-md bg-red-500 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-red-600 hover:scale-105">
-                Get Started
-              </button>
+              <a href="https://drive.google.com/file/d/1xaEzMTY-p4vWFs653HhR4MhqAr0oYRES/view?usp=drivesdk" target="_blank" className="w-full rounded-md bg-red-500 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-red-600 hover:scale-105">
+                Get Resume
+              </a>
             </div>
           </div>
         </>
