@@ -42,7 +42,7 @@ const Projects = () => {
       id:2,
       name: "Financial Calculator",
       techStack: ["React", "HTML", "CSS","JS","Tailwindcss"],
-      preview: "https://money-inn.netlify.app/",
+      preview: "https://calcunomics.netlify.app/",
       image: "/assets/imgs/moneyinn.webp",
       type: "web"
     },
