@@ -51,7 +51,7 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex flex-1 items-center justify-center lg:items-stretch lg:justify-start">
             <a href="/" className="text-xl text-red-500 font-bold transition-transform duration-200 hover:scale-105 h-10 w-10">
-              <img src="/logo.png" alt="" className="w-full h-full"/>
+              <img src="/logo.png" alt="" className="w-full h-full" />
             </a>
           </div>
 
@@ -60,8 +60,16 @@ export default function Navbar() {
             onClick={() => setIsOpen(true)}
             className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500 lg:hidden"
           >
-            <span className="sr-only">Open menu</span>
-            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <span className="sr-only open-menu">Open menu</span>
+            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" onClick={() => {
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({
+                event: 'svg_click',
+                event_category: 'Icon',
+                event_action: 'Click',
+                event_label: 'Home Icon' // Make dynamic if needed
+              });
+            }}>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
@@ -71,7 +79,7 @@ export default function Navbar() {
             {menuItems.map((item) => (
               <p
                 key={item.name}
-                onClick={()=>handleScroll(item?.href)}
+                onClick={() => handleScroll(item?.href)}
                 className="cursor-pointer relative text-sm font-medium text-gray-300 transition-colors duration-200 hover:text-red-500 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-red-500 after:transition-all after:duration-200 hover:after:w-full"
               >
                 {item.name}
