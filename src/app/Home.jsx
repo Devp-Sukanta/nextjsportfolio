@@ -33,7 +33,7 @@ function Home() {
     "/assets/imgs/technologies/vscode.png",
     "/assets/imgs/technologies/cpanel.png",
   ]
-
+ 
   return (
     <div>
         <Nav/>
